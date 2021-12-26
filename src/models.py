@@ -17,7 +17,7 @@ class Model_v1(nn.Module):
             nn.Linear(my_confg.l_dim, my_confg.output_dim)
         )
 
-    def forward(self, X, locations,times, state=None):
+    def forward(self, X, locations,times):
         X = X.permute(1,0,2)
         X = X.to(torch.float32)
         _, state = self.rnn(X)

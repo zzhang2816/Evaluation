@@ -1,0 +1,28 @@
+method: 'random'
+metric: 
+      name: 'loss'
+      goal: 'minimize'
+num_epochs: 10
+batch_size: 10
+save_to_path: "checkpoints/param_search/"
+model: "model_v1"
+# dataset-specific: DO NOT EDIT THEM
+loc_dim: 10
+time_dim: 24
+X_dim: 49
+output_dim: 1
+parameters:
+      embed_loc_size: [5, 16, 32]
+      embed_time_size: [10, 16, 32]
+      num_hiddens:
+            values: [16, 64, 128]
+      l_dim: 
+            values: [16, 32, 64]
+      lr: 
+            values: [1e-3, 3e-4]
+      num_layers:
+            values: [1,2]
+      dropout:
+            values: [0, 0.3, 0.5]
+      
+      

@@ -6,12 +6,14 @@ def arg_parser():
     parser_v1 = subparsers.add_parser('v1')
     parser_v2 = subparsers.add_parser('v2')
     # Training confg
-    parser.add_argument('--use_wandb', action='store_false')
+    parser.add_argument('--use_wandb', action='store_true')
     parser.add_argument('--num_epochs', type=int, default=10)
+    parser.add_argument('--batch_size', type=int, default=16)
     parser.add_argument('--load_from_path', type=str, default=None)
     parser.add_argument('--save_to_path', type=str, default="checkpoints/lastest/")
     
     # V1 
+    parser_v1.add_argument('--model', type=str, default="model_v1") # DO NOT EDIT THIS
     # Categorical Embeddings
     parser_v1.add_argument('--embed_loc_size', type=int, default=5)
     parser_v1.add_argument('--embed_time_size', type=int, default=10)
@@ -22,6 +24,7 @@ def arg_parser():
     parser_v1.add_argument('--l_dim', type=int, default=16)
 
     # V2
+    parser_v2.add_argument('--model', type=str, default="model_v2") # DO NOT EDIT THIS
     # Categorical Embeddings
     parser_v2.add_argument('--embed_loc_size', type=int, default=5)
     parser_v2.add_argument('--embed_time_size', type=int, default=10)

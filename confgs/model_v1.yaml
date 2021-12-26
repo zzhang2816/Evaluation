@@ -1,0 +1,40 @@
+method: 'random'
+metric: 
+      name: 'loss'
+      goal: 'minimize'
+# early_terminate:
+#   type: hyperband
+#   min_iter: 5
+#   max_iter: 30
+parameters:
+      num_epochs: 
+            values: [1]
+      batch_size: 
+            values: [10]
+      save_to_path: 
+            values: ["checkpoints/v1/"]
+      load_from_path:
+            values: [null]
+      model: 
+            values: ["model_v1"]
+      embed_loc_size: 
+            values: [5, 16, 32]
+      embed_time_size: 
+            values: [10, 16, 32]
+      num_hiddens:
+            values: [16, 64, 128]
+      l_dim: 
+            values: [16, 32, 64]
+      lr: 
+            values: [1e-3, 3e-4]
+      num_layers:
+            values: [1,2]
+      # dataset-specific: DO NOT EDIT THEM
+      loc_dim: 
+            values: [10]
+      time_dim: 
+            values: [24]
+      X_dim: 
+            values: [49]
+      output_dim: 
+            values: [1]
