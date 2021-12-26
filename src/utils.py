@@ -170,7 +170,7 @@ def log_loss(epoch_trainlosses, epoch_vallosses,my_confg,save_name):
 
 
 def sweep_train():
-        wandb.init(mode='disabled')
+        wandb.init()
         my_confg = wandb.config
         my_confg = argparse.Namespace(**my_confg)
         train_set=np.load("dataset/train.npz")

@@ -8,9 +8,9 @@ metric:
 #   max_iter: 30
 parameters:
       num_epochs: 
-            values: [1]
+            values: [500]
       batch_size: 
-            values: [10]
+            values: [64]
       save_to_path: 
             values: ["checkpoints/v1/"]
       load_from_path:

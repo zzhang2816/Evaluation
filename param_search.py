@@ -13,6 +13,6 @@ if __name__ =="__main__":
         except yaml.YAMLError as exc:
             print(exc)
     wandb.login()
-    sweep_id = wandb.sweep(my_confg, project="trial")
-    wandb.agent(sweep_id, sweep_train,count=1)
+    sweep_id = wandb.sweep(my_confg, project="Evaluation")
+    wandb.agent(sweep_id, sweep_train,count=30)
     wandb.finish()

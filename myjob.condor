@@ -1,0 +1,7 @@
+executable = train.sh
+requirements =  (CUDADeviceName == "GeForce RTX 2080 Ti") 
+request_GPUs=1
+error      = ./logs/training.err
+log        = ./logs/training.log
+output     = ./logs/training.out
+queue
