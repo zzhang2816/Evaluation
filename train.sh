@@ -6,4 +6,4 @@ source ~/.bashrc
 . "/public/zhiyuan/anaconda3/etc/profile.d/conda.sh"
 
 conda activate torch
-python3 param_search.py --model model_v1
+python3 param_search.py --model model_v2
