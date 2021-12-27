@@ -9,7 +9,7 @@ class Model_v1(nn.Module):
         self.loc_x_embedLayer=nn.Embedding(my_confg.loc_dim,my_confg.embed_loc_size)
         self.loc_y_embedLayer=nn.Embedding(my_confg.loc_dim,my_confg.embed_loc_size)
         self.time_embedLayer=nn.Embedding(my_confg.time_dim,my_confg.embed_time_size)
-        self.rnn = nn.GRU(my_confg.X_dim, my_confg.num_hiddens,my_confg.num_layers)
+        self.rnn = nn.GRU(my_confg.X_dim, my_confg.num_hiddens,my_confg.num_layers,my_confg.GRU_dropout)
         concat_dim = my_confg.num_hiddens+2*my_confg.embed_loc_size+my_confg.embed_time_size
         self.mlp = nn.Sequential(
             nn.Linear(concat_dim, my_confg.l_dim),
