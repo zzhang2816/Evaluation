@@ -2,18 +2,25 @@ method: 'random'
 metric: 
       name: 'loss'
       goal: 'minimize'
-num_epochs: 10
-batch_size: 10
-save_to_path: "checkpoints/param_search/"
-model: "model_v1"
-# dataset-specific: DO NOT EDIT THEM
-loc_dim: 10
-time_dim: 24
-X_dim: 49
-output_dim: 1
+# early_terminate:
+#   type: hyperband
+#   min_iter: 5
+#   max_iter: 30
 parameters:
-      embed_loc_size: [5, 16, 32]
-      embed_time_size: [10, 16, 32]
+      num_epochs: 
+            values: [500]
+      batch_size: 
+            values: [64]
+      save_to_path: 
+            values: ["checkpoints/v2/"]
+      load_from_path:
+            values: [null]
+      model: 
+            values: ["model_v2"]
+      embed_loc_size: 
+            values: [5, 16, 32]
+      embed_time_size: 
+            values: [10, 16, 32]
       num_hiddens:
             values: [16, 64, 128]
       l_dim: 
@@ -22,7 +29,14 @@ parameters:
             values: [1e-3, 3e-4]
       num_layers:
             values: [1,2]
+      # dataset-specific: DO NOT EDIT THEM
+      loc_dim: 
+            values: [10]
+      time_dim: 
+            values: [24]
+      X_dim: 
+            values: [49]
+      output_dim: 
+            values: [1]
       dropout:
             values: [0, 0.3, 0.5]
-      
-      
