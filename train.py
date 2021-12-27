@@ -8,7 +8,7 @@ if __name__ =="__main__":
     my_confg = arg_parser()
     if my_confg.use_wandb:
         wandb.login()
-        wandb.init(project="trial")
+        wandb.init(project="Eval")
     train_set=np.load("dataset/train.npz")
     val_set=np.load("dataset/val.npz")
     train_data = Mydataset(train_set)

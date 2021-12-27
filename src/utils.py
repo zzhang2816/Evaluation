@@ -92,7 +92,7 @@ def train_model(net,train_loader, val_loader, my_confg):
             os.mkdir(my_confg.save_to_path)
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         loss = nn.MSELoss()
-        optimizer = torch.optim.Adam(net.parameters(), lr=my_confg.lr, betas=(0.9, 0.999), eps=1e-08, weight_decay=0)
+        optimizer = torch.optim.Adam(net.parameters(), lr=my_confg.lr, betas=(0.9, 0.999), eps=1e-08, weight_decay=my_confg.weight_decay)
         
         # scheduler = optim.lr_scheduler.ReduceLROnPlateau(optim, 'min',factor=0.5, verbose = True, min_lr=1e-6, patience = 5)
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, 25)

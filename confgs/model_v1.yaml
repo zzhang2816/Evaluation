@@ -11,6 +11,8 @@ parameters:
             values: [500]
       batch_size: 
             values: [64]
+      weight_decay:
+            values: [0]
       save_to_path: 
             values: ["checkpoints/v1/"]
       load_from_path:

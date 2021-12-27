@@ -9,6 +9,8 @@ def arg_parser():
     parser.add_argument('--use_wandb', action='store_true')
     parser.add_argument('--num_epochs', type=int, default=10)
     parser.add_argument('--batch_size', type=int, default=16)
+    parser.add_argument('--weight_decay', type=float, default=0)
+    parser.add_argument('--lr', type=float, default=1e-3)
     parser.add_argument('--load_from_path', type=str, default=None)
     parser.add_argument('--save_to_path', type=str, default="checkpoints/lastest/")
     
