@@ -34,6 +34,7 @@ def arg_parser():
     # GRU
     parser_v2.add_argument('--num_hiddens', type=int, default=8)
     parser_v2.add_argument('--num_layers', type=int, default=2)
+    parser_v2.add_argument('--GRU_dropout', type=float, default=0)
     # MLP
     parser_v2.add_argument('--l_dim', type=int, default=16)
     # Attention
