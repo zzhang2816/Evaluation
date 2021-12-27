@@ -152,7 +152,7 @@ def train_model(net,train_loader, val_loader, my_confg):
                 break
         if my_confg.use_wandb:
             wandb.finish()
-        log_loss(epoch_trainlosses, epoch_vallosses,my_confg.save_to_path+save_name)
+        log_loss(epoch_trainlosses, epoch_vallosses, my_confg, save_name)
 
 
 def log_loss(epoch_trainlosses, epoch_vallosses,my_confg,save_name):
