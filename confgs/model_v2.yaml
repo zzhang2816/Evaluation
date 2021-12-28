@@ -13,6 +13,8 @@ parameters:
             values: [64]
       weight_decay:
             values: [0]
+      GRU_dropout:
+            values: [0]
       save_to_path: 
             values: ["checkpoints/v2/"]
       load_from_path:
