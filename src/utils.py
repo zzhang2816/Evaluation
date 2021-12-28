@@ -11,10 +11,15 @@ from .models import Model_v1, Model_v2
 import argparse
 
 class Mydataset(Dataset):
-    def __init__(self,dataset,min_x, max_x):
+    def __init__(self,dataset,min_x = None, max_x = None, isTest=False):
         X=torch.tensor(dataset['x'],dtype = torch.float32)
-        self.X= (X - min_x) / (max_x - min_x)
-        self.y=torch.tensor(dataset['y'],dtype = torch.float32)
+        if min_x != None and max_x != None:
+            self.X= (X - min_x) / (max_x - min_x)
+        else:
+            self.X= X
+        self.isTest = isTest
+        if not isTest:
+            self.y=torch.tensor(dataset['y'],dtype = torch.float32)
         self.locations=torch.tensor(dataset['locations'],dtype = torch.int)
         self.times=torch.tensor(dataset['times'],dtype = torch.int)
         
@@ -22,16 +27,19 @@ class Mydataset(Dataset):
         return len(self.X)
     
     def __getitem__(self,index):
-        return self.X[index],self.y[index],self.locations[index],self.times[index]
+        if not self.isTest:
+            return self.X[index],self.y[index],self.locations[index],self.times[index]
+        else:
+            return self.X[index],self.locations[index],self.times[index]
 
 
-def generate_dataloaders(train_data,val_data,batch_size):
-    train_loader = DataLoader(dataset=train_data, batch_size=batch_size, shuffle=True)
+def generate_dataloaders(train_data,val_data,batch_size,isShuffle=True):
+    train_loader = DataLoader(dataset=train_data, batch_size=batch_size, shuffle=isShuffle)
     X, y,locations,times=next(iter(train_loader))
     print(f'TRAIN: the shape of X: {X.shape}; the shape of y: {y.shape}\
 the shape of locations: {locations.shape};the shape of times: {times.shape};')
 
-    val_loader = DataLoader(dataset=val_data, batch_size=batch_size, shuffle=True)
+    val_loader = DataLoader(dataset=val_data, batch_size=batch_size, shuffle=isShuffle)
     X, y,locations,times=next(iter(val_loader))
     print(f'VAL: the shape of X: {X.shape}; the shape of y: {y.shape}\
 the shape of locations: {locations.shape};the shape of times: {times.shape};')
@@ -247,3 +255,18 @@ def sweep_train():
                 print("Early stopping")
                 break
         log_loss(epoch_trainlosses, epoch_vallosses,my_confg,save_name)
+
+def pred(net, loader):
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    torch.set_grad_enabled(False)
+    net.to(device)
+    net.eval()
+    y_pred = []
+    for X,locations,times in loader: 
+        X=X.to(device)
+        locations=locations.to(device)
+        times=times.to(device)
+        y_hat=net(X,locations,times)
+        y_pred.append(y_hat.cpu().detach().numpy())
+    predictions = np.concatenate(y_pred)
+    return predictions
