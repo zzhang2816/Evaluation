@@ -11,8 +11,9 @@ from .models import Model_v1, Model_v2
 import argparse
 
 class Mydataset(Dataset):
-    def __init__(self,dataset):
-        self.X=torch.tensor(dataset['x'],dtype = torch.float32)
+    def __init__(self,dataset,min_x, max_x):
+        X=torch.tensor(dataset['x'],dtype = torch.float32)
+        self.X= (X - min_x) / (max_x - min_x)
         self.y=torch.tensor(dataset['y'],dtype = torch.float32)
         self.locations=torch.tensor(dataset['locations'],dtype = torch.int)
         self.times=torch.tensor(dataset['times'],dtype = torch.int)
